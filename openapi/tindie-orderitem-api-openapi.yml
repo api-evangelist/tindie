@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Tindie order orderitem API
+  version: v1
+  description: 'Tindie''s public v1 REST API (Django Tastypie). It exposes three resources: `product` (public catalog listings for a store), and `order` and `orderitem` (a seller''s own orders, authenticated). Responses are JSON using the standard Tastypie envelope (`meta` pagination + `objects` array). The `product` resource schema is public; `order` and `orderitem` require API-key authentication and return 401 without credentials.'
+  contact:
+    name: Tindie Support
+    url: https://www.tindie.com/help/
+servers:
+- url: https://www.tindie.com/api/v1
+  description: Production
+security: []
+tags:
+- name: orderitem
+  description: Line items within a seller's orders (authenticated).
+paths:
+  /orderitem/:
+    get:
+      tags:
+      - orderitem
+      operationId: listOrderItems
+      summary: List order items
+      description: List line items across the authenticated seller's orders. Requires API-key authentication. Returns 401 without valid credentials.
+      security:
+      - apiKeyQuery: []
+        usernameQuery: []
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: A paginated list of order items (Tastypie envelope).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEnvelope'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ListMeta:
+      type: object
+      description: Tastypie pagination metadata.
+      properties:
+        limit:
+          type: integer
+          example: 20
+        offset:
+          type: integer
+          example: 0
+        total_count:
+          type: integer
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+    TastypieError:
+      type: object
+      description: Tastypie error envelope.
+      properties:
+        error_message:
+          type: string
+        traceback:
+          type: string
+    ListEnvelope:
+      type: object
+      description: Standard Tastypie list envelope. `objects` field schema for order / orderitem is only exposed to authenticated callers.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ListMeta'
+        objects:
+          type: array
+          items:
+            type: object
+  parameters:
+    format:
+      name: format
+      in: query
+      description: Response serialization format (e.g. `json`).
+      required: false
+      schema:
+        type: string
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema:
+        type: integer
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Missing or invalid API-key credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 'Tindie API key (Tastypie ApiKeyAuthentication). Passed as the `api_key` query parameter alongside `username`, or as the header `Authorization: ApiKey <username>:<api_key>`.'
+    usernameQuery:
+      type: apiKey
+      in: query
+      name: username
+      description: The Tindie account username that owns the API key.
