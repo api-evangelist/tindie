@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Tindie
+  version: 1.0.0
+extends: openapi/tindie-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: true
+      x-apievangelist-framework: django-tastypie
+      x-apievangelist-auth: api-key
+  - target: $.tags
+    update:
+      - name: product
+        description: Public store product listings.
+      - name: order
+        description: Authenticated seller orders.

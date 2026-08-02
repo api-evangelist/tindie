@@ -1,0 +1,272 @@
+# generated: '2026-07-21'
+# method: searched
+# source: https://www.tindie.com/api/v1/ (Tastypie API index + live /product/schema/)
+openapi: 3.0.3
+info:
+  title: Tindie API
+  version: v1
+  description: >-
+    Tindie's public v1 REST API (Django Tastypie). It exposes three resources:
+    `product` (public catalog listings for a store), and `order` and `orderitem`
+    (a seller's own orders, authenticated). Responses are JSON using the standard
+    Tastypie envelope (`meta` pagination + `objects` array). The `product` resource
+    schema is public; `order` and `orderitem` require API-key authentication and
+    return 401 without credentials.
+  contact:
+    name: Tindie Support
+    url: https://www.tindie.com/help/
+servers:
+  - url: https://www.tindie.com/api/v1
+    description: Production
+security: []
+tags:
+  - name: product
+    description: Store product listings (public read).
+  - name: order
+    description: A seller's orders (authenticated).
+  - name: orderitem
+    description: Line items within a seller's orders (authenticated).
+paths:
+  /product/:
+    get:
+      tags: [product]
+      operationId: listProducts
+      summary: List products
+      description: >-
+        List product listings. Public resource — no authentication required.
+        Supports Tastypie filtering on `id` (in/exact) and `pre_order` (exact),
+        and `limit`/`offset` pagination (default limit 20).
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/format'
+        - name: id
+          in: query
+          description: Filter by product id (exact) or comma list via `id__in`.
+          required: false
+          schema: { type: integer }
+        - name: pre_order
+          in: query
+          description: Filter to pre-order products.
+          required: false
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: A paginated list of products.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProductListResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /product/{id}/:
+    get:
+      tags: [product]
+      operationId: getProduct
+      summary: Get a product
+      description: Retrieve a single product listing by id. Public resource.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: The product.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Product' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /product/schema/:
+    get:
+      tags: [product]
+      operationId: getProductSchema
+      summary: Get the product resource schema
+      description: >-
+        Returns the self-describing Tastypie schema for the product resource
+        (fields, types, allowed methods, filtering). Public.
+      responses:
+        '200':
+          description: Tastypie resource schema document.
+          content:
+            application/json:
+              schema: { type: object }
+  /order/:
+    get:
+      tags: [order]
+      operationId: listOrders
+      summary: List orders
+      description: >-
+        List the authenticated seller's orders. Requires API-key authentication
+        (Tastypie ApiKeyAuthentication). Returns 401 without valid credentials.
+        Field schema is only available to authenticated callers via
+        `/order/schema/`.
+      security:
+        - apiKeyQuery: []
+          usernameQuery: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: A paginated list of orders (Tastypie envelope).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /order/{id}/:
+    get:
+      tags: [order]
+      operationId: getOrder
+      summary: Get an order
+      description: Retrieve one of the authenticated seller's orders by id.
+      security:
+        - apiKeyQuery: []
+          usernameQuery: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema: { type: object }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /orderitem/:
+    get:
+      tags: [orderitem]
+      operationId: listOrderItems
+      summary: List order items
+      description: >-
+        List line items across the authenticated seller's orders. Requires
+        API-key authentication. Returns 401 without valid credentials.
+      security:
+        - apiKeyQuery: []
+          usernameQuery: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: A paginated list of order items (Tastypie envelope).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ListEnvelope' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: >-
+        Tindie API key (Tastypie ApiKeyAuthentication). Passed as the `api_key`
+        query parameter alongside `username`, or as the header
+        `Authorization: ApiKey <username>:<api_key>`.
+    usernameQuery:
+      type: apiKey
+      in: query
+      name: username
+      description: The Tindie account username that owns the API key.
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema: { type: integer, default: 20 }
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema: { type: integer, default: 0 }
+    format:
+      name: format
+      in: query
+      description: Response serialization format (e.g. `json`).
+      required: false
+      schema: { type: string, default: json }
+  responses:
+    BadRequest:
+      description: Malformed request or invalid filter.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/TastypieError' }
+    Unauthorized:
+      description: Missing or invalid API-key credentials.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/TastypieError' }
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/TastypieError' }
+  schemas:
+    ListMeta:
+      type: object
+      description: Tastypie pagination metadata.
+      properties:
+        limit: { type: integer, example: 20 }
+        offset: { type: integer, example: 0 }
+        total_count: { type: integer }
+        next: { type: string, nullable: true }
+        previous: { type: string, nullable: true }
+    ListEnvelope:
+      type: object
+      description: >-
+        Standard Tastypie list envelope. `objects` field schema for order /
+        orderitem is only exposed to authenticated callers.
+      properties:
+        meta: { $ref: '#/components/schemas/ListMeta' }
+        objects:
+          type: array
+          items: { type: object }
+    ProductListResponse:
+      type: object
+      properties:
+        meta: { $ref: '#/components/schemas/ListMeta' }
+        objects:
+          type: array
+          items: { $ref: '#/components/schemas/Product' }
+    Product:
+      type: object
+      description: A Tindie product listing (fields derived from live /product/schema/).
+      properties:
+        id: { type: integer, readOnly: true }
+        title: { type: string }
+        state: { type: string, default: Draft, description: Listing state. }
+        category: { type: string, readOnly: true }
+        url: { type: string, readOnly: true, description: Product page URL. }
+        image: { type: string, readOnly: true }
+        unit_price: { type: string, description: 'Fixed-precision decimal, e.g. 26.73.' }
+        open_hardware: { type: boolean, default: false }
+        open_code: { type: boolean, readOnly: true }
+        pre_order: { type: boolean, default: false }
+        pre_order_percentage: { type: integer, readOnly: true }
+        pre_order_time_left: { type: string, readOnly: true }
+        pre_order_total: { type: string, readOnly: true }
+        min_num_pre_orders: { type: integer, nullable: true }
+        num_pre_orders_sold: { type: integer, readOnly: true }
+        amount_raised: { type: string, readOnly: true, description: Fixed-precision decimal. }
+        start_date: { type: string, format: date-time, nullable: true }
+        end_date: { type: string, format: date-time, nullable: true }
+        date_added: { type: string, format: date-time, nullable: true }
+        store_name: { type: string, readOnly: true }
+        store_username: { type: string, readOnly: true }
+        store_url: { type: string, readOnly: true }
+        store_avatar: { type: string, readOnly: true }
+        resource_uri: { type: string, readOnly: true }
+    TastypieError:
+      type: object
+      description: Tastypie error envelope.
+      properties:
+        error_message: { type: string }
+        traceback: { type: string }

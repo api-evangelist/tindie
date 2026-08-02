@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tindie-openapi.yml
+entities:
+  - name: product
+    resource: /api/v1/product/
+    id_prefix: null
+    key: id
+    fields_source: live /product/schema/ (public)
+    notable_fields: [title, state, category, unit_price, pre_order, store_username, resource_uri]
+  - name: order
+    resource: /api/v1/order/
+    key: id
+    fields_source: authenticated (/order/schema/ returns 401 without credentials)
+  - name: orderitem
+    resource: /api/v1/orderitem/
+    key: id
+    fields_source: authenticated (/orderitem/schema/ returns 401 without credentials)
+relationships:
+  - from: orderitem
+    to: order
+    type: belongs_to
+    via: order
+    note: >-
+      Order items are the line items of an order (Tastypie related resource).
+      Exact foreign-key field name not captured (auth-gated schema).
+  - from: orderitem
+    to: product
+    type: belongs_to
+    via: product
+    note: Each order item references the purchased product. Field name auth-gated.
+  - from: product
+    to: store
+    type: belongs_to
+    via: store_username
+    note: >-
+      Products expose store identity inline (store_name, store_username,
+      store_url, store_avatar) rather than a separate store resource.

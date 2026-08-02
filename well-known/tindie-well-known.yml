@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+host: https://www.tindie.com
+documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: >-
+      Returns HTTP 200 but with an empty body — no RFC 9116 Contact/Policy
+      fields are published. Not captured as a SecurityTxt artifact.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404

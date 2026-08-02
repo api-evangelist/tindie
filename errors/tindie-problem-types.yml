@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tindie-openapi.yml
+format: tastypie
+envelope:
+  fields: [error_message, traceback]
+  media_type: application/json
+  note: >-
+    Tindie's Tastypie API does not use RFC 9457 problem+json; errors return a
+    JSON body with `error_message` (and `traceback` when debug is enabled) plus
+    the HTTP status code.
+problems:
+  - status: 400
+    title: Bad Request
+    remediation: Check filter parameters and query syntax.
+    source_operation: openapi/tindie-openapi.yml#listProducts
+  - status: 401
+    title: Unauthorized
+    remediation: >-
+      Provide a valid `api_key` + `username` (or ApiKey Authorization header).
+      Observed live on /order/ and /orderitem/ without credentials.
+    source_operation: openapi/tindie-openapi.yml#listOrders
+  - status: 403
+    title: Forbidden
+    remediation: The authenticated account may not access this resource.
+  - status: 404
+    title: Not Found
+    remediation: Verify the resource id / path.
+    source_operation: openapi/tindie-openapi.yml#getProduct
+  - status: 500
+    title: Internal Server Error
+    remediation: Retry later; contact support if persistent.

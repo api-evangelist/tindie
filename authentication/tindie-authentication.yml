@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/tindie-openapi.yml
+docs: https://www.tindie.com/help/
+summary:
+  types: [apiKey]
+  api_key_in: [query, header]
+  oauth2_flows: []
+  note: >-
+    Tindie uses Django Tastypie ApiKeyAuthentication. Authenticated calls to the
+    order and orderitem resources require an API key issued from the seller's
+    account settings, passed as `api_key` + `username` query parameters or the
+    header `Authorization: ApiKey <username>:<api_key>`. The product resource is
+    public and requires no authentication. Verified live: /order/ and
+    /orderitem/ return HTTP 401 without credentials; /product/ is open.
+schemes:
+  - name: apiKeyQuery
+    type: apiKey
+    in: query
+    parameter: api_key
+    sources: [openapi/tindie-openapi.yml]
+  - name: usernameQuery
+    type: apiKey
+    in: query
+    parameter: username
+    sources: [openapi/tindie-openapi.yml]
+  - name: authorizationHeader
+    type: apiKey
+    in: header
+    parameter: Authorization
+    format: 'ApiKey <username>:<api_key>'
+    sources: [openapi/tindie-openapi.yml]

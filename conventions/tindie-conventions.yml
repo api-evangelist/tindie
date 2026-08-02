@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tindie-openapi.yml
+framework: Django Tastypie
+authentication:
+  style: api-key
+  detail: >-
+    ApiKeyAuthentication — `api_key` + `username` query params or
+    `Authorization: ApiKey <username>:<api_key>` header. See
+    authentication/tindie-authentication.yml.
+pagination:
+  style: limit-offset
+  request_params: [limit, offset]
+  default_limit: 20
+  response_fields: [meta.limit, meta.offset, meta.total_count, meta.next, meta.previous]
+  note: Standard Tastypie offset pagination; `limit=0` returns all objects.
+filtering:
+  style: tastypie-field-filters
+  examples:
+    - 'id__in=1,2,3'
+    - 'pre_order=true'
+serialization:
+  default_format: application/json
+  format_override_param: format
+  formats: [json]
+error_envelope:
+  shape: '{ "error_message": "...", "traceback": "..." }'
+  ref: errors/tindie-problem-types.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key mechanism is documented; the public API surface is
+    read-oriented (GET). No Idempotency pointer emitted.
+versioning:
+  scheme: uri-path
+  current: v1
+  ref: lifecycle/tindie-lifecycle.yml
+rate_limiting:
+  documented: false
+  note: No published rate-limit headers or quota documentation found.
+resource_uri:
+  note: >-
+    Every object carries a `resource_uri` (e.g. /api/v1/product/123/) — the
+    Tastypie HATEOAS self-link convention.

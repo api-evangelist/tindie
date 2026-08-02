@@ -1,0 +1,18 @@
+{
+  "provider": "tindie",
+  "sources": [
+    "tindie-order-api-openapi.yml",
+    "tindie-orderitem-api-openapi.yml",
+    "tindie-product-api-openapi.yml"
+  ],
+  "outputs": [
+    "tindie-order-api-openapi.yml",
+    "tindie-orderitem-api-openapi.yml",
+    "tindie-product-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

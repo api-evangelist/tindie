@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/tindie-openapi.yml
+skills:
+  - file: tindie-browse-products.md
+    name: Browse Tindie products
+    api: openapi/tindie-openapi.yml
+    operations: [listProducts, getProduct]
+  - file: tindie-fetch-orders.md
+    name: Fetch Tindie seller orders
+    api: openapi/tindie-openapi.yml
+    operations: [listOrders, getOrder, listOrderItems]

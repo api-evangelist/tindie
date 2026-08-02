@@ -1,8 +1,26 @@
 aid: tindie
 name: Tindie
-description: Tindie is a company surfaced as a portfolio company of a16z, slow-ventures, version-one-ventures
-  and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the
-  enrichment pipeline.
+description: >-
+  Tindie is an online marketplace for indie electronics and maker hardware — DIY
+  kits, robotics, 3D-printing gear, IoT boards, and open-source hardware sold
+  directly by independent creators worldwide. Tindie publishes a small public
+  REST API built on Django Tastypie that exposes product listings and, for
+  authenticated sellers, their orders and order line items, using API-key
+  authentication (ApiKey) and standard Tastypie limit/offset pagination with a
+  self-describing per-resource schema surface.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/2267159
 url: https://raw.githubusercontent.com/api-evangelist/tindie/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -14,15 +32,97 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Marketplace
+- Hardware
+- Electronics
+- Maker
+- eCommerce
+- Open Source Hardware
+- Orders
+apis:
+- aid: tindie:tindie-order-api
+  name: Tindie order API
+  description: A seller's orders (authenticated).
+  humanURL: https://www.tindie.com/api/v1/
+  baseURL: https://www.tindie.com/api/v1
+  tags:
+  - order
+  properties:
+  - type: OpenAPI
+    url: openapi/tindie-order-api-openapi.yml
+  - type: Authentication
+    url: authentication/tindie-authentication.yml
+- aid: tindie:tindie-orderitem-api
+  name: Tindie orderitem API
+  description: Line items within a seller's orders (authenticated).
+  humanURL: https://www.tindie.com/api/v1/
+  baseURL: https://www.tindie.com/api/v1
+  tags:
+  - orderitem
+  properties:
+  - type: OpenAPI
+    url: openapi/tindie-orderitem-api-openapi.yml
+  - type: Authentication
+    url: authentication/tindie-authentication.yml
+- aid: tindie:tindie-product-api
+  name: Tindie product API
+  description: Store product listings (public read).
+  humanURL: https://www.tindie.com/api/v1/
+  baseURL: https://www.tindie.com/api/v1
+  tags:
+  - product
+  properties:
+  - type: OpenAPI
+    url: openapi/tindie-product-api-openapi.yml
+  - type: Authentication
+    url: authentication/tindie-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/tindie-domain-security.yml
 - type: Website
-  url: https://tindie.com
+  url: https://www.tindie.com
+- type: APIReference
+  url: https://www.tindie.com/api/v1/
+- type: Support
+  url: https://www.tindie.com/help/
+- type: Blog
+  url: https://www.tindie.com/blog/
+- type: TermsOfService
+  url: https://www.tindie.com/about/terms/
+- type: GitHubOrganization
+  url: https://github.com/tindie
+- type: Authentication
+  url: authentication/tindie-authentication.yml
+- type: Conventions
+  url: conventions/tindie-conventions.yml
+- type: ErrorCatalog
+  url: errors/tindie-problem-types.yml
+- type: DataModel
+  url: data-model/tindie-data-model.yml
+- type: Lifecycle
+  url: lifecycle/tindie-lifecycle.yml
+- type: WellKnown
+  url: well-known/tindie-well-known.yml
+- type: MCPServer
+  url: mcp/tindie-mcp.yml
+- type: LLMsTxt
+  url: llms/tindie-llms.txt
+- type: Conformance
+  url: conformance/tindie-conformance.yml
+- type: Overlay
+  url: overlays/tindie-openapi-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

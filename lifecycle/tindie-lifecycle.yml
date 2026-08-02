@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.tindie.com/api/v1/
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://www.tindie.com/api/v1/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation or Sunset-header policy found.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_note: >-
+  No dedicated status page (e.g. status.tindie.com) was found; /.well-known and
+  common status subdomains were not present.
+deprecated_operations: []
