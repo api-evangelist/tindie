@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tindie order product API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "product",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.tindie.com/api/v1/product/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (Tastypie; default 20). Use 0 for all."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset for pagination."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format (e.g. `json`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product id (exact) or comma list via `id__in`."
+              },
+              {
+                "name": "pre_order",
+                "value": "",
+                "type": "query",
+                "description": "Filter to pre-order products."
+              }
+            ]
+          },
+          "docs": "List product listings. Public resource — no authentication required. Supports Tastypie filtering on `id` (in/exact) and `pre_order` (exact), and `limit`/`offset` pagination (default limit 20)."
+        },
+        {
+          "info": {
+            "name": "Get a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.tindie.com/api/v1/product/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format (e.g. `json`)."
+              }
+            ]
+          },
+          "docs": "Retrieve a single product listing by id. Public resource."
+        },
+        {
+          "info": {
+            "name": "Get the product resource schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.tindie.com/api/v1/product/schema/"
+          },
+          "docs": "Returns the self-describing Tastypie schema for the product resource (fields, types, allowed methods, filtering). Public."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

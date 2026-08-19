@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "0abea8ce-6497-42fb-8da0-7ed3aa1c12d8",
+      "name": "orderitem",
+      "description": {
+        "content": "Line items within a seller's orders (authenticated).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2ad187f-fb70-4c2f-96db-b51f6711240d",
+          "name": "List order items",
+          "request": {
+            "name": "List order items",
+            "description": {
+              "content": "List line items across the authenticated seller's orders. Requires API-key authentication. Returns 401 without valid credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orderitem",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Page size (Tastypie; default 20). Use 0 for all."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response serialization format (e.g. `json`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c470b2f1-5f25-4e83-a59d-ace030329b51",
+              "name": "A paginated list of order items (Tastypie envelope).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orderitem",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 20,\n    \"offset\": 0,\n    \"total_count\": 5966,\n    \"next\": \"string\",\n    \"previous\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c59343ec-e205-41f6-bf76-0a4296ddad82",
+              "name": "Missing or invalid API-key credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orderitem",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"traceback\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.tindie.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d9df57a0-aab8-4fbd-8d98-e926f12c6875",
+    "name": "Tindie order orderitem API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tindie's public v1 REST API (Django Tastypie). It exposes three resources: `product` (public catalog listings for a store), and `order` and `orderitem` (a seller's own orders, authenticated). Responses are JSON using the standard Tastypie envelope (`meta` pagination + `objects` array). The `product` resource schema is public; `order` and `orderitem` require API-key authentication and return 401 without credentials.\n\nContact Support:\n Name: Tindie Support",
+      "type": "text/plain"
+    }
+  }
+}

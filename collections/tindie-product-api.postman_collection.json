@@ -1,0 +1,439 @@
+{
+  "item": [
+    {
+      "id": "364c2dc9-f799-4b5e-866c-0ad517732821",
+      "name": "product",
+      "description": {
+        "content": "Store product listings (public read).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d647e14-c11b-4d83-93b8-186cddf2e974",
+          "name": "List products",
+          "request": {
+            "name": "List products",
+            "description": {
+              "content": "List product listings. Public resource — no authentication required. Supports Tastypie filtering on `id` (in/exact) and `pre_order` (exact), and `limit`/`offset` pagination (default limit 20).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Page size (Tastypie; default 20). Use 0 for all."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response serialization format (e.g. `json`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Filter by product id (exact) or comma list via `id__in`."
+                },
+                {
+                  "disabled": false,
+                  "key": "pre_order",
+                  "value": "<boolean>",
+                  "description": "Filter to pre-order products."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50bb2480-d810-4b49-9588-836063167fdf",
+              "name": "A paginated list of products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pre_order",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 20,\n    \"offset\": 0,\n    \"total_count\": 2199,\n    \"next\": \"string\",\n    \"previous\": \"string\"\n  },\n  \"objects\": [\n    {\n      \"id\": 2384,\n      \"title\": \"string\",\n      \"state\": \"Draft\",\n      \"category\": \"string\",\n      \"url\": \"string\",\n      \"image\": \"string\",\n      \"unit_price\": \"string\",\n      \"open_hardware\": false,\n      \"open_code\": false,\n      \"pre_order\": false,\n      \"pre_order_percentage\": 5266,\n      \"pre_order_time_left\": \"string\",\n      \"pre_order_total\": \"string\",\n      \"min_num_pre_orders\": 7203,\n      \"num_pre_orders_sold\": 2711,\n      \"amount_raised\": \"string\",\n      \"start_date\": \"1994-10-05T03:03:16.570Z\",\n      \"end_date\": \"2018-11-17T09:43:33.461Z\",\n      \"date_added\": \"1967-12-27T01:31:59.007Z\",\n      \"store_name\": \"string\",\n      \"store_username\": \"string\",\n      \"store_url\": \"string\",\n      \"store_avatar\": \"string\",\n      \"resource_uri\": \"string\"\n    },\n    {\n      \"id\": 6380,\n      \"title\": \"string\",\n      \"state\": \"Draft\",\n      \"category\": \"string\",\n      \"url\": \"string\",\n      \"image\": \"string\",\n      \"unit_price\": \"string\",\n      \"open_hardware\": false,\n      \"open_code\": false,\n      \"pre_order\": false,\n      \"pre_order_percentage\": 2209,\n      \"pre_order_time_left\": \"string\",\n      \"pre_order_total\": \"string\",\n      \"min_num_pre_orders\": 9139,\n      \"num_pre_orders_sold\": 746,\n      \"amount_raised\": \"string\",\n      \"start_date\": \"1971-12-17T13:59:38.967Z\",\n      \"end_date\": \"1993-12-16T13:41:43.365Z\",\n      \"date_added\": \"2022-04-03T17:22:57.815Z\",\n      \"store_name\": \"string\",\n      \"store_username\": \"string\",\n      \"store_url\": \"string\",\n      \"store_avatar\": \"string\",\n      \"resource_uri\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9672b4c3-eef7-480f-8998-8c973f86ba9a",
+              "name": "Malformed request or invalid filter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pre_order",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"traceback\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a160fc6-1697-48b0-8303-0bc38a67bcec",
+          "name": "Get a product",
+          "request": {
+            "name": "Get a product",
+            "description": {
+              "content": "Retrieve a single product listing by id. Public resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response serialization format (e.g. `json`)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05f4039d-3ddd-45e2-b234-c43d86e207cc",
+              "name": "The product.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8004,\n  \"title\": \"string\",\n  \"state\": \"Draft\",\n  \"category\": \"string\",\n  \"url\": \"string\",\n  \"image\": \"string\",\n  \"unit_price\": \"string\",\n  \"open_hardware\": false,\n  \"open_code\": false,\n  \"pre_order\": false,\n  \"pre_order_percentage\": 1303,\n  \"pre_order_time_left\": \"string\",\n  \"pre_order_total\": \"string\",\n  \"min_num_pre_orders\": 7976,\n  \"num_pre_orders_sold\": 224,\n  \"amount_raised\": \"string\",\n  \"start_date\": \"2017-01-27T21:10:12.132Z\",\n  \"end_date\": \"2018-01-06T08:16:33.640Z\",\n  \"date_added\": \"1992-09-22T14:58:45.623Z\",\n  \"store_name\": \"string\",\n  \"store_username\": \"string\",\n  \"store_url\": \"string\",\n  \"store_avatar\": \"string\",\n  \"resource_uri\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13dabd05-bf7d-4009-acf3-c0d810ba4862",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"traceback\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "898a29b2-18d2-47bb-820e-8467ed9be190",
+          "name": "Get the product resource schema",
+          "request": {
+            "name": "Get the product resource schema",
+            "description": {
+              "content": "Returns the self-describing Tastypie schema for the product resource (fields, types, allowed methods, filtering). Public.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                "schema",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0edf0bd8-cb85-47c4-8815-8414540c5414",
+              "name": "Tastypie resource schema document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "schema",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.tindie.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b40f43bf-7efd-437b-9cfa-c27935d4ccfc",
+    "name": "Tindie order product API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tindie's public v1 REST API (Django Tastypie). It exposes three resources: `product` (public catalog listings for a store), and `order` and `orderitem` (a seller's own orders, authenticated). Responses are JSON using the standard Tastypie envelope (`meta` pagination + `objects` array). The `product` resource schema is public; `order` and `orderitem` require API-key authentication and return 401 without credentials.\n\nContact Support:\n Name: Tindie Support",
+      "type": "text/plain"
+    }
+  }
+}

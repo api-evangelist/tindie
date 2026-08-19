@@ -2,26 +2,31 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/tindie-openapi.yml
-note: >-
-  No official hosted/remote Tindie MCP server was found (no @modelcontextprotocol
-  package, registry entry, or docs reference). The following is a candidate tool
-  list derived one-to-one from the OpenAPI operations, for a future MCP wrapper.
+note: No official hosted/remote Tindie MCP server was found (no @modelcontextprotocol package, registry
+  entry, or docs reference). The following is a candidate tool list derived one-to-one from the OpenAPI
+  operations, for a future MCP wrapper.
 server:
   name: tindie
   transport: http
 tools:
-  - name: list_products
-    description: List a store's product listings (public).
-    source_operation: openapi/tindie-openapi.yml#listProducts
-  - name: get_product
-    description: Retrieve a single product listing by id (public).
-    source_operation: openapi/tindie-openapi.yml#getProduct
-  - name: list_orders
-    description: List the authenticated seller's orders.
-    source_operation: openapi/tindie-openapi.yml#listOrders
-  - name: get_order
-    description: Retrieve one of the seller's orders by id.
-    source_operation: openapi/tindie-openapi.yml#getOrder
-  - name: list_order_items
-    description: List line items across the seller's orders.
-    source_operation: openapi/tindie-openapi.yml#listOrderItems
+- name: list_products
+  description: List a store's product listings (public).
+  source_operation: openapi/tindie-openapi.yml#listProducts
+- name: get_product
+  description: Retrieve a single product listing by id (public).
+  source_operation: openapi/tindie-openapi.yml#getProduct
+- name: list_orders
+  description: List the authenticated seller's orders.
+  source_operation: openapi/tindie-openapi.yml#listOrders
+- name: get_order
+  description: Retrieve one of the seller's orders by id.
+  source_operation: openapi/tindie-openapi.yml#getOrder
+- name: list_order_items
+  description: List line items across the seller's orders.
+  source_operation: openapi/tindie-openapi.yml#listOrderItems
+deployment:
+  mode: none
+  verified: derived
+  tools: 5
+  checked: '2026-08-12'
+  source: catalog MCP census

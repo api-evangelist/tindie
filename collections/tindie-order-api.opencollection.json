@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tindie order API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.tindie.com/api/v1/order/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (Tastypie; default 20). Use 0 for all."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset for pagination."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format (e.g. `json`)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "query"
+            }
+          },
+          "docs": "List the authenticated seller's orders. Requires API-key authentication (Tastypie ApiKeyAuthentication). Returns 401 without valid credentials. Field schema is only available to authenticated callers via `/order/schema/`."
+        },
+        {
+          "info": {
+            "name": "Get an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.tindie.com/api/v1/order/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format (e.g. `json`)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Retrieve one of the authenticated seller's orders by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

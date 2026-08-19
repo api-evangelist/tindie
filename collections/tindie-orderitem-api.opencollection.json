@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tindie order orderitem API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orderitem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List order items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.tindie.com/api/v1/orderitem/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (Tastypie; default 20). Use 0 for all."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset for pagination."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format (e.g. `json`)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "query"
+            }
+          },
+          "docs": "List line items across the authenticated seller's orders. Requires API-key authentication. Returns 401 without valid credentials."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
