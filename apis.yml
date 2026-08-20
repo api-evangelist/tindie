@@ -39,6 +39,15 @@ tags:
 - Hardware
 - Electronics
 - Maker
+- E-Commerce
+- Open Source Hardware
+- Order
+tags_raw:
+- Company
+- Marketplace
+- Hardware
+- Electronics
+- Maker
 - eCommerce
 - Open Source Hardware
 - Orders
@@ -49,6 +58,8 @@ apis:
   humanURL: https://www.tindie.com/api/v1/
   baseURL: https://www.tindie.com/api/v1
   tags:
+  - Order
+  tags_raw:
   - order
   properties:
   - type: OpenAPI
@@ -73,6 +84,8 @@ apis:
   humanURL: https://www.tindie.com/api/v1/
   baseURL: https://www.tindie.com/api/v1
   tags:
+  - Product
+  tags_raw:
   - product
   properties:
   - type: OpenAPI
