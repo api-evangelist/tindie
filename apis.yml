@@ -8,6 +8,18 @@ description: >-
   authenticated sellers, their orders and order line items, using API-key
   authentication (ApiKey) and standard Tastypie limit/offset pagination with a
   self-describing per-resource schema surface.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
