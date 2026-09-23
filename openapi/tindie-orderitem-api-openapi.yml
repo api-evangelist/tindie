@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tindie order orderitem API
+  title: Tindie Orderitem API
   version: v1
   description: 'Tindie''s public v1 REST API (Django Tastypie). It exposes three resources: `product` (public catalog listings for a store), and `order` and `orderitem` (a seller''s own orders, authenticated). Responses are JSON using the standard Tastypie envelope (`meta` pagination + `objects` array). The `product` resource schema is public; `order` and `orderitem` require API-key authentication and return 401 without credentials.'
   contact:
@@ -39,6 +39,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    ListEnvelope:
+      type: object
+      description: Standard Tastypie list envelope. `objects` field schema for order / orderitem is only exposed to authenticated callers.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ListMeta'
+        objects:
+          type: array
+          items:
+            type: object
     ListMeta:
       type: object
       description: Tastypie pagination metadata.
@@ -52,11 +62,13 @@ components:
         total_count:
           type: integer
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
     TastypieError:
       type: object
       description: Tastypie error envelope.
@@ -65,17 +77,15 @@ components:
           type: string
         traceback:
           type: string
-    ListEnvelope:
-      type: object
-      description: Standard Tastypie list envelope. `objects` field schema for order / orderitem is only exposed to authenticated callers.
-      properties:
-        meta:
-          $ref: '#/components/schemas/ListMeta'
-        objects:
-          type: array
-          items:
-            type: object
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 0
     format:
       name: format
       in: query
@@ -92,14 +102,6 @@ components:
       schema:
         type: integer
         default: 20
-    offset:
-      name: offset
-      in: query
-      description: Result offset for pagination.
-      required: false
-      schema:
-        type: integer
-        default: 0
   responses:
     Unauthorized:
       description: Missing or invalid API-key credentials.

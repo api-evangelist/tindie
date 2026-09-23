@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tindie order product API
+  title: Tindie Product API
   version: v1
   description: 'Tindie''s public v1 REST API (Django Tastypie). It exposes three resources: `product` (public catalog listings for a store), and `order` and `orderitem` (a seller''s own orders, authenticated). Responses are JSON using the standard Tastypie envelope (`meta` pagination + `objects` array). The `product` resource schema is public; `order` and `orderitem` require API-key authentication and return 401 without credentials.'
   contact:
@@ -11,13 +11,13 @@ servers:
   description: Production
 security: []
 tags:
-- name: product
+- name: Product
   description: Store product listings (public read).
 paths:
   /product/:
     get:
       tags:
-      - product
+      - Product
       operationId: listProducts
       summary: List products
       description: List product listings. Public resource — no authentication required. Supports Tastypie filtering on `id` (in/exact) and `pre_order` (exact), and `limit`/`offset` pagination (default limit 20).
@@ -49,7 +49,7 @@ paths:
   /product/{id}/:
     get:
       tags:
-      - product
+      - Product
       operationId: getProduct
       summary: Get a product
       description: Retrieve a single product listing by id. Public resource.
@@ -72,7 +72,7 @@ paths:
   /product/schema/:
     get:
       tags:
-      - product
+      - Product
       operationId: getProductSchema
       summary: Get the product resource schema
       description: Returns the self-describing Tastypie schema for the product resource (fields, types, allowed methods, filtering). Public.
@@ -84,7 +84,61 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 0
+    format:
+      name: format
+      in: query
+      description: Response serialization format (e.g. `json`).
+      required: false
+      schema:
+        type: string
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema:
+        type: integer
+        default: 20
   schemas:
+    ProductListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ListMeta'
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    ListMeta:
+      type: object
+      description: Tastypie pagination metadata.
+      properties:
+        limit:
+          type: integer
+          example: 20
+        offset:
+          type: integer
+          example: 0
+        total_count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+        previous:
+          type:
+          - string
+          - 'null'
     Product:
       type: object
       description: A Tindie product listing (fields derived from live /product/schema/).
@@ -130,8 +184,9 @@ components:
           type: string
           readOnly: true
         min_num_pre_orders:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         num_pre_orders_sold:
           type: integer
           readOnly: true
@@ -140,17 +195,20 @@ components:
           readOnly: true
           description: Fixed-precision decimal.
         start_date:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         end_date:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         date_added:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         store_name:
           type: string
           readOnly: true
@@ -166,24 +224,6 @@ components:
         resource_uri:
           type: string
           readOnly: true
-    ListMeta:
-      type: object
-      description: Tastypie pagination metadata.
-      properties:
-        limit:
-          type: integer
-          example: 20
-        offset:
-          type: integer
-          example: 0
-        total_count:
-          type: integer
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
     TastypieError:
       type: object
       description: Tastypie error envelope.
@@ -192,40 +232,6 @@ components:
           type: string
         traceback:
           type: string
-    ProductListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ListMeta'
-        objects:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-  parameters:
-    format:
-      name: format
-      in: query
-      description: Response serialization format (e.g. `json`).
-      required: false
-      schema:
-        type: string
-        default: json
-    limit:
-      name: limit
-      in: query
-      description: Page size (Tastypie; default 20). Use 0 for all.
-      required: false
-      schema:
-        type: integer
-        default: 20
-    offset:
-      name: offset
-      in: query
-      description: Result offset for pagination.
-      required: false
-      schema:
-        type: integer
-        default: 0
   responses:
     BadRequest:
       description: Malformed request or invalid filter.
