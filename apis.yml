@@ -66,7 +66,7 @@ tags_raw:
 - Orders
 apis:
 - aid: tindie:tindie-order-api
-  name: Tindie order API
+  name: Tindie Order API
   description: A seller's orders (authenticated).
   humanURL: https://www.tindie.com/api/v1/
   baseURL: https://www.tindie.com/api/v1
@@ -80,7 +80,7 @@ apis:
   - type: Authentication
     url: authentication/tindie-authentication.yml
 - aid: tindie:tindie-orderitem-api
-  name: Tindie orderitem API
+  name: Tindie Orderitem API
   description: Line items within a seller's orders (authenticated).
   humanURL: https://www.tindie.com/api/v1/
   baseURL: https://www.tindie.com/api/v1
@@ -92,7 +92,7 @@ apis:
   - type: Authentication
     url: authentication/tindie-authentication.yml
 - aid: tindie:tindie-product-api
-  name: Tindie product API
+  name: Tindie Product API
   description: Store product listings (public read).
   humanURL: https://www.tindie.com/api/v1/
   baseURL: https://www.tindie.com/api/v1
