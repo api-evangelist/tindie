@@ -75,14 +75,6 @@ components:
       schema:
         type: integer
         default: 0
-    limit:
-      name: limit
-      in: query
-      description: Page size (Tastypie; default 20). Use 0 for all.
-      required: false
-      schema:
-        type: integer
-        default: 20
     format:
       name: format
       in: query
@@ -91,19 +83,14 @@ components:
       schema:
         type: string
         default: json
-  responses:
-    Unauthorized:
-      description: Missing or invalid API-key credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TastypieError'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TastypieError'
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema:
+        type: integer
+        default: 20
   schemas:
     TastypieError:
       type: object
@@ -143,6 +130,19 @@ components:
           type: array
           items:
             type: object
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
+    Unauthorized:
+      description: Missing or invalid API-key credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
   securitySchemes:
     apiKeyQuery:
       type: apiKey
