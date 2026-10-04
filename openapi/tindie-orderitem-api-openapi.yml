@@ -38,40 +38,24 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Result offset for pagination.
-      required: false
-      schema:
-        type: integer
-        default: 0
-    format:
-      name: format
-      in: query
-      description: Response serialization format (e.g. `json`).
-      required: false
-      schema:
-        type: string
-        default: json
-    limit:
-      name: limit
-      in: query
-      description: Page size (Tastypie; default 20). Use 0 for all.
-      required: false
-      schema:
-        type: integer
-        default: 20
+  responses:
+    Unauthorized:
+      description: Missing or invalid API-key credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
   schemas:
-    TastypieError:
+    ListEnvelope:
       type: object
-      description: Tastypie error envelope.
+      description: Standard Tastypie list envelope. `objects` field schema for order / orderitem is only exposed to authenticated callers.
       properties:
-        error_message:
-          type: string
-        traceback:
-          type: string
+        meta:
+          $ref: '#/components/schemas/ListMeta'
+        objects:
+          type: array
+          items:
+            type: object
     ListMeta:
       type: object
       description: Tastypie pagination metadata.
@@ -92,23 +76,39 @@ components:
           type:
           - string
           - 'null'
-    ListEnvelope:
+    TastypieError:
       type: object
-      description: Standard Tastypie list envelope. `objects` field schema for order / orderitem is only exposed to authenticated callers.
+      description: Tastypie error envelope.
       properties:
-        meta:
-          $ref: '#/components/schemas/ListMeta'
-        objects:
-          type: array
-          items:
-            type: object
-  responses:
-    Unauthorized:
-      description: Missing or invalid API-key credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TastypieError'
+        error_message:
+          type: string
+        traceback:
+          type: string
+  parameters:
+    format:
+      name: format
+      in: query
+      description: Response serialization format (e.g. `json`).
+      required: false
+      schema:
+        type: string
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema:
+        type: integer
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     apiKeyQuery:
       type: apiKey

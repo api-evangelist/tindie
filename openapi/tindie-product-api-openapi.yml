@@ -84,28 +84,7 @@ paths:
               schema:
                 type: object
 components:
-  responses:
-    BadRequest:
-      description: Malformed request or invalid filter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TastypieError'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TastypieError'
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Result offset for pagination.
-      required: false
-      schema:
-        type: integer
-        default: 0
     format:
       name: format
       in: query
@@ -122,24 +101,15 @@ components:
       schema:
         type: integer
         default: 20
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 0
   schemas:
-    ProductListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ListMeta'
-        objects:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-    TastypieError:
-      type: object
-      description: Tastypie error envelope.
-      properties:
-        error_message:
-          type: string
-        traceback:
-          type: string
     Product:
       type: object
       description: A Tindie product listing (fields derived from live /product/schema/).
@@ -245,6 +215,36 @@ components:
           type:
           - string
           - 'null'
+    ProductListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ListMeta'
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    TastypieError:
+      type: object
+      description: Tastypie error envelope.
+      properties:
+        error_message:
+          type: string
+        traceback:
+          type: string
+  responses:
+    BadRequest:
+      description: Malformed request or invalid filter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
   securitySchemes:
     apiKeyQuery:
       type: apiKey
