@@ -38,14 +38,15 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid API-key credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TastypieError'
   schemas:
+    TastypieError:
+      type: object
+      description: Tastypie error envelope.
+      properties:
+        error_message:
+          type: string
+        traceback:
+          type: string
     ListEnvelope:
       type: object
       description: Standard Tastypie list envelope. `objects` field schema for order / orderitem is only exposed to authenticated callers.
@@ -76,31 +77,7 @@ components:
           type:
           - string
           - 'null'
-    TastypieError:
-      type: object
-      description: Tastypie error envelope.
-      properties:
-        error_message:
-          type: string
-        traceback:
-          type: string
   parameters:
-    format:
-      name: format
-      in: query
-      description: Response serialization format (e.g. `json`).
-      required: false
-      schema:
-        type: string
-        default: json
-    limit:
-      name: limit
-      in: query
-      description: Page size (Tastypie; default 20). Use 0 for all.
-      required: false
-      schema:
-        type: integer
-        default: 20
     offset:
       name: offset
       in: query
@@ -109,6 +86,29 @@ components:
       schema:
         type: integer
         default: 0
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema:
+        type: integer
+        default: 20
+    format:
+      name: format
+      in: query
+      description: Response serialization format (e.g. `json`).
+      required: false
+      schema:
+        type: string
+        default: json
+  responses:
+    Unauthorized:
+      description: Missing or invalid API-key credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TastypieError'
   securitySchemes:
     apiKeyQuery:
       type: apiKey

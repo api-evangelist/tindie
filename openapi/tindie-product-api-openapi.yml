@@ -84,32 +84,24 @@ paths:
               schema:
                 type: object
 components:
-  parameters:
-    format:
-      name: format
-      in: query
-      description: Response serialization format (e.g. `json`).
-      required: false
-      schema:
-        type: string
-        default: json
-    limit:
-      name: limit
-      in: query
-      description: Page size (Tastypie; default 20). Use 0 for all.
-      required: false
-      schema:
-        type: integer
-        default: 20
-    offset:
-      name: offset
-      in: query
-      description: Result offset for pagination.
-      required: false
-      schema:
-        type: integer
-        default: 0
   schemas:
+    TastypieError:
+      type: object
+      description: Tastypie error envelope.
+      properties:
+        error_message:
+          type: string
+        traceback:
+          type: string
+    ProductListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ListMeta'
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
     Product:
       type: object
       description: A Tindie product listing (fields derived from live /product/schema/).
@@ -215,23 +207,6 @@ components:
           type:
           - string
           - 'null'
-    ProductListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ListMeta'
-        objects:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-    TastypieError:
-      type: object
-      description: Tastypie error envelope.
-      properties:
-        error_message:
-          type: string
-        traceback:
-          type: string
   responses:
     BadRequest:
       description: Malformed request or invalid filter.
@@ -245,6 +220,31 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/TastypieError'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Result offset for pagination.
+      required: false
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Page size (Tastypie; default 20). Use 0 for all.
+      required: false
+      schema:
+        type: integer
+        default: 20
+    format:
+      name: format
+      in: query
+      description: Response serialization format (e.g. `json`).
+      required: false
+      schema:
+        type: string
+        default: json
   securitySchemes:
     apiKeyQuery:
       type: apiKey
