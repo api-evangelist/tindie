@@ -5,8 +5,15 @@
       "source": "https://www.tindie.com/blog/",
       "feed_url": "https://blog.tindie.com/feed/",
       "title": "",
-      "saved": 2,
+      "saved": 0,
       "method": "discovered"
+    },
+    {
+      "source": "https://blog.tindie.com/feed/",
+      "feed_url": "https://blog.tindie.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://www.tindie.com/help/",
@@ -16,6 +23,6 @@
       "method": "none"
     }
   ],
-  "post_count": 2,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 10,
+  "fetched": "2026-10-17T14:53:57Z"
 }
