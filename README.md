@@ -64,6 +64,112 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Tindie is a company surfaced as a portfolio company of a16z, slow-ventures, version-one-ventures and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Tindie is an online marketplace for indie electronics and maker hardware — DIY kits, robotics, 3D-printing gear, IoT boards, and open-source hardware sold directly by independent creators worldwide. Tindie publishes a small public REST API built on Django Tastypie that exposes product listings and, for authenticated sellers, their orders and order line items, using API-key authentication (ApiKey) and standard Tastypie limit/offset pagination with a self-describing per-resource schema surface.
 
-Backed by: a16z, slow-ventures, version-one-ventures — https://tindie.com
+**Areas:** Company · Marketplace · Hardware · Electronics · Maker · E-Commerce · Open Source Hardware · Order
+
+## Tindie on APIs.io
+
+Everything profiled for Tindie is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tindie/](https://apis.io/providers/tindie/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Tindie Order API](https://apis.io/apis/tindie/tindie-order-api/) — A seller's orders (authenticated).
+- [Tindie Orderitem API](https://apis.io/apis/tindie/tindie-orderitem-api/) — Line items within a seller's orders (authenticated).
+- [Tindie Product API](https://apis.io/apis/tindie/tindie-product-api/) — Store product listings (public read).
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [tindie](https://apis.io/servers/tindie/tindie/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Tindie order API](https://apis.io/collections/tindie/open-tindie-order-api/)
+- [Tindie order orderitem API](https://apis.io/collections/tindie/open-tindie-orderitem-api/)
+- [Tindie order product API](https://apis.io/collections/tindie/open-tindie-product-api/)
+- [API Collection](https://apis.io/collections/tindie/open-tindie-product-schema/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Tindie Openapi Overlay](https://apis.io/overlays/tindie/tindie-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Tindie Authentication](https://apis.io/security/tindie/tindie-authentication/)
+- [Tindie Domain Security](https://apis.io/security/tindie/tindie-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.tindie.com)
+- [API reference](https://www.tindie.com/api/v1/)
+- [Support](https://www.tindie.com/help/)
+- [Blog](https://www.tindie.com/blog/)
+- [Terms of service](https://www.tindie.com/about/terms/)
+- [GitHub](https://github.com/tindie)
+
+## API Evangelist rating
+
+**Kin Score 28.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 47.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 24.4 |
+| Access clarity | 10.5 |
+
+**Agent readiness 19.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tindie/](https://apis.io/providers/tindie/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tindie: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tindie/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
